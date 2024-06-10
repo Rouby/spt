@@ -46,9 +46,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,
@@ -149,9 +147,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,
@@ -252,9 +248,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,
@@ -355,9 +349,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,

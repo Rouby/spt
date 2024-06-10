@@ -5,14 +5,14 @@
   "Settings": {
     "easy": {
       "Aiming": {
-        "DistanceAimTimeMultiplier": 1.0,
+        "DistanceAimTimeMultiplier": 1.91,
         "FasterCQBReactions": true,
         "FasterCQBReactionsDistance": 30.0,
         "FasterCQBReactionsMinimum": 0.33,
-        "AccuracySpreadMulti": 1.0,
+        "AccuracySpreadMulti": 2.0,
         "MAX_AIMING_UPGRADE_BY_TIME": 0.85,
         "COEF_IF_MOVE": 1.5,
-        "MAX_AIM_TIME": 1.5,
+        "MAX_AIM_TIME": 2.0,
         "SHPERE_FRIENDY_FIRE_SIZE": 0.15,
         "RECALC_MUST_TIME": 1,
         "RECALC_MUST_TIME_MIN": 1,
@@ -28,7 +28,7 @@
       "Change": {},
       "Core": {
         "VisibleAngle": 160.0,
-        "VisibleDistance": 120.0,
+        "VisibleDistance": 110.0,
         "GainSightCoef": 0.2,
         "ScatteringPerMeter": 0.05,
         "ScatteringClosePerMeter": 0.12,
@@ -46,12 +46,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 1.5,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,
@@ -89,13 +87,13 @@
       "Move": {},
       "Patrol": {},
       "Scattering": {
-        "ScatterMultiplier": 1.0,
+        "ScatterMultiplier": 1.55,
         "HandDamageRecoilMulti": 1.35,
         "HandDamageScatteringMinMax": 1.35,
         "HandDamageAccuracySpeed": 1.35
       },
       "Shoot": {
-        "RecoilMultiplier": 1.0,
+        "RecoilMultiplier": 1.45,
         "BurstMulti": 1.25,
         "FireratMulti": 1.35,
         "MaxPointFireDistance": 80.0,
@@ -108,14 +106,14 @@
     },
     "normal": {
       "Aiming": {
-        "DistanceAimTimeMultiplier": 1.0,
+        "DistanceAimTimeMultiplier": 1.35,
         "FasterCQBReactions": true,
         "FasterCQBReactionsDistance": 30.0,
         "FasterCQBReactionsMinimum": 0.33,
-        "AccuracySpreadMulti": 1.0,
+        "AccuracySpreadMulti": 1.5,
         "MAX_AIMING_UPGRADE_BY_TIME": 0.85,
         "COEF_IF_MOVE": 1.5,
-        "MAX_AIM_TIME": 1.5,
+        "MAX_AIM_TIME": 1.763,
         "SHPERE_FRIENDY_FIRE_SIZE": 0.15,
         "RECALC_MUST_TIME": 1,
         "RECALC_MUST_TIME_MIN": 1,
@@ -140,7 +138,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 2.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.2,
@@ -149,9 +147,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,
@@ -234,7 +230,7 @@
       "Change": {},
       "Core": {
         "VisibleAngle": 160.0,
-        "VisibleDistance": 120.0,
+        "VisibleDistance": 130.0,
         "GainSightCoef": 0.2,
         "ScatteringPerMeter": 0.05,
         "ScatteringClosePerMeter": 0.12,
@@ -243,7 +239,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 1.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.2,
@@ -252,12 +248,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 0.9,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,
@@ -314,14 +308,14 @@
     },
     "impossible": {
       "Aiming": {
-        "DistanceAimTimeMultiplier": 1.0,
+        "DistanceAimTimeMultiplier": 0.79,
         "FasterCQBReactions": true,
         "FasterCQBReactionsDistance": 30.0,
         "FasterCQBReactionsMinimum": 0.33,
-        "AccuracySpreadMulti": 1.0,
+        "AccuracySpreadMulti": 0.8,
         "MAX_AIMING_UPGRADE_BY_TIME": 0.85,
         "COEF_IF_MOVE": 1.5,
-        "MAX_AIM_TIME": 1.5,
+        "MAX_AIM_TIME": 1.25,
         "SHPERE_FRIENDY_FIRE_SIZE": 0.15,
         "RECALC_MUST_TIME": 1,
         "RECALC_MUST_TIME_MIN": 1,
@@ -337,7 +331,7 @@
       "Change": {},
       "Core": {
         "VisibleAngle": 160.0,
-        "VisibleDistance": 120.0,
+        "VisibleDistance": 140.0,
         "GainSightCoef": 0.2,
         "ScatteringPerMeter": 0.05,
         "ScatteringClosePerMeter": 0.12,
@@ -346,7 +340,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 0.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.2,
@@ -355,12 +349,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 0.6,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,

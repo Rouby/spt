@@ -46,12 +46,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 1.5,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,
@@ -89,13 +87,13 @@
       "Move": {},
       "Patrol": {},
       "Scattering": {
-        "ScatterMultiplier": 1.0,
+        "ScatterMultiplier": 1.51,
         "HandDamageRecoilMulti": 1.35,
         "HandDamageScatteringMinMax": 1.35,
         "HandDamageAccuracySpeed": 1.35
       },
       "Shoot": {
-        "RecoilMultiplier": 1.0,
+        "RecoilMultiplier": 1.44,
         "BurstMulti": 1.25,
         "FireratMulti": 1.35,
         "MaxPointFireDistance": 80.0,
@@ -140,7 +138,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 2.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.1,
@@ -149,9 +147,7 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
         "VisionSpeedModifier": 1.0,
@@ -243,7 +239,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 1.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.1,
@@ -252,12 +248,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 0.9,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,
@@ -346,7 +340,7 @@
       },
       "Grenade": {
         "CAN_THROW_STRAIGHT_CONTACT": false,
-        "TimeSinceSeenBeforeThrow": 3.0,
+        "TimeSinceSeenBeforeThrow": 0.0,
         "DELTA_NEXT_ATTEMPT": 2.0,
         "MIN_DIST_NOT_TO_THROW": 8.0,
         "GrenadePrecision": 0.1,
@@ -355,12 +349,10 @@
         "DELTA_GRENADE_START_TIME": 0.0,
         "BEWARE_TYPE": 3
       },
-      "Hearing": {
-        "MaxFootstepAudioDistance": 71.0
-      },
+      "Hearing": {},
       "Lay": {},
       "Look": {
-        "VisionSpeedModifier": 1.0,
+        "VisionSpeedModifier": 0.6,
         "CloseVisionSpeed": 1.0,
         "FarVisionSpeed": 1.0,
         "CloseFarThresh": 50.0,

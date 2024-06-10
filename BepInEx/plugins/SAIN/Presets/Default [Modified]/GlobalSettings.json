@@ -1,25 +1,49 @@
 {
   "General": {
     "GlobalDifficultyModifier": 0.9,
-    "VanillaBosses": false,
-    "VanillaScavs": false,
-    "VanillaPlayerScavs": false,
+    "RandomSpeedHacker": false,
     "PerformanceMode": false,
     "NewDoorOpening": true,
     "LimitAIvsAI": true,
     "LimitAIvsAIMaxAudioRange": 125.0,
     "LimitAIvsAIMaxAudioRangeVeryFar": 80.0,
-    "BotsUseGrenades": true,
-    "HeadShotProtection": true,
-    "NotLookingToggle": false,
-    "NotLookingTimeLimit": 4.0,
-    "NotLookingAngle": 45.0,
-    "NotLookingVisionSpeedModifier": 1.0,
-    "NotLookingAccuracyAmount": 1.0
+    "BotsUseGrenades": true
+  },
+  "SAINEnabled": {
+    "VanillaScavs": false,
+    "VanillaBosses": false,
+    "VanillaFollowers": false,
+    "VanillaGoons": false,
+    "VanillaBloodHounds": false,
+    "VanillaRogues": false,
+    "VanillaCultists": false
+  },
+  "Performance": {
+    "MinJobSize": 2.0,
+    "SpherecastRadius": 0.025,
+    "MaxBotsToCheckVisionPerFrame": 3.0
   },
   "Aiming": {
+    "HeadShotProtection": true,
+    "HeadShotProtectionPMC": true,
+    "PoseLevelScatterMulti": 0.8,
+    "ProneScatterMulti": 0.7,
+    "PartVisScatterMulti": 0.75,
+    "OpticFarMulti": 1.2,
+    "OpticFarDistance": 100.0,
+    "OpticCloseMulti": 0.8,
+    "OpticCloseDistance": 75.0,
+    "RedDotFarMulti": 0.85,
+    "RedDotFarDistance": 100.0,
+    "RedDotCloseMulti": 1.15,
+    "RedDotCloseDistance": 65.0,
+    "IronSightFarMulti": 0.7,
+    "IronSightScaleDistanceStart": 50.0,
+    "IronSightScaleDistanceEnd": 100.0,
+    "CenterMassVal": 0.312,
     "AccuracySpreadMultiGlobal": 1.0,
-    "FasterCQBReactionsGlobal": true
+    "FasterCQBReactionsGlobal": true,
+    "PMCSAimForHead": false
   },
   "Cover": {
     "ShiftCoverMustBeSafe": true,
@@ -34,7 +58,7 @@
     "DebugCoverFinder": false
   },
   "Extract": {
-    "EnableExtractsGlobal": true
+    "EnableExtractsGlobal": false
   },
   "Flashlight": {
     "DazzleEffectiveness": 3.0,
@@ -55,6 +79,20 @@
     "AllRats": false
   },
   "Hearing": {
+    "MaxFootstepAudioDistance": 70.0,
+    "MaxFootstepAudioDistanceNoHeadphones": 50.0,
+    "BaseSoundRange_Looting": 60.0,
+    "BaseSoundRange_MovementTurnSkid": 30.0,
+    "BaseSoundRange_GrenadePinDraw": 35.0,
+    "BaseSoundRange_Prone": 50.0,
+    "BaseSoundRange_Healing": 40.0,
+    "BaseSoundRange_Reload": 30.0,
+    "BaseSoundRange_Surgery": 55.0,
+    "BaseSoundRange_DryFire": 10.0,
+    "MaxSoundRange_FallLanding": 70.0,
+    "BaseSoundRange_AimingandGearRattle": 35.0,
+    "BaseSoundRange_EatDrink": 40.0,
+    "MaxRangeToReportEnemyActionNoHeadset": 50.0,
     "BaseHearingDelayWithEnemy": 0.2,
     "BaseHearingDelayAtPeace": 0.35,
     "GunshotAudioMultiplier": 1.0,
@@ -96,10 +134,16 @@
     "GlobalVisionDistanceMultiplier": 1.0,
     "GlobalVisionSpeedModifier": 1.0,
     "SprintingVisionModifier": 0.66,
+    "MovementDistanceModifier": 1.5,
     "HighElevationMaxAngle": 60.0,
     "HighElevationVisionModifier": 1.0,
     "LowElevationMaxAngle": 30.0,
     "LowElevationVisionModifier": 1.0,
+    "NotLookingToggle": true,
+    "NotLookingTimeLimit": 4.0,
+    "NotLookingAngle": 45.0,
+    "NotLookingVisionSpeedModifier": 1.1,
+    "NotLookingAccuracyAmount": 0.33,
     "NightTimeVisionModifier": 0.3,
     "NightTimeVisionModifierSnow": 0.4,
     "HourDawnStart": 6.0,
@@ -116,8 +160,27 @@
   },
   "Mind": {
     "GlobalAggression": 1.0,
+    "SneakyBots": true,
+    "OnlySneakyPersonalitiesSneaky": false,
+    "MaximumDistanceToBeSneaky": 80.0,
     "MaxSuppressionDistance": 10.0,
     "MaxUnderFireDistance": 2.0
+  },
+  "Move": {
+    "EditSprintSpeed": true,
+    "BotSprintNotMovingThreshold": 0.1,
+    "BotSprintTryVaultTime": 0.1,
+    "BotSprintTryJumpTime": 0.45,
+    "BotSprintRecalcTime": 1.0,
+    "BotSprintFirstTurnDotThreshold": 0.925,
+    "BotSprintBaseReachDist": 0.15,
+    "BotSprintFinalDestReachDist": 0.5,
+    "BotSprintBufferDist": 0.5,
+    "BotSprintMinDist": 0.25,
+    "BotSprintNextCornerAngleMax": 30.0,
+    "BotSprintCurrentCornerAngleMax": 25.0,
+    "BotSprintTurnSpeed": 250.0,
+    "BotSprintFirstTurnSpeed": 400.0
   },
   "NoBushESP": {
     "NoBushESPToggle": true,
@@ -240,10 +303,10 @@
   },
   "Talk": {
     "TalkativeScavs": true,
-    "TalkativePMCs": false,
+    "TalkativePMCs": true,
     "TalkativeRaidersRogues": true,
     "TalkativeBosses": true,
-    "TalkativeGoons": false,
+    "TalkativeGoons": true,
     "FriendlyReponseChance": 85.0,
     "FriendlyReponseChanceAI": 80.0,
     "FriendlyReponseDistance": 65.0,
