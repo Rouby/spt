@@ -3,14 +3,13 @@ import { DependencyContainer } from "tsyringe";
 
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ItemFilterService } from "@spt-aki/services/ItemFilterService";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 
 import advancedConfig from "../../config/advancedConfig.json";
 import config from "../../config/config.json";
 import { IBotConfig } from "../../types/models/spt/config/IBotConfig.d";
 import {
-  addBossSecureContainer,
+  addBossSecuredContainer,
   addToModsObject,
   AmmoParent,
   armorPlateParent,
@@ -24,11 +23,10 @@ import {
   cloneDeep,
   combineWhitelist,
   deleteBlacklistedItemsFromInventory,
-  ensureAllAmmoInSecureContainer,
+  ensureAllAmmoInSecuredContainer,
   fixEmptyChancePlates,
   getEquipmentType,
   magParent,
-  mergeDeep,
   moneyParent,
   numList,
   reduceAmmoChancesTo1,
@@ -44,12 +42,12 @@ import Tier5 from "../Constants/Tier5";
 
 import botConfigequipmentpmc from "../Cache/botConfigequipmentpmc.json";
 import tablesbotstypesusec from "../Cache/tablesbotstypesusec.json";
+import { globalValues } from "./GlobalValues";
+import { buildLootChanges } from "./LootChanges";
 
 export default function ProgressionChanges(
   container: DependencyContainer
 ): undefined {
-  const itemFilterService =
-    container.resolve<ItemFilterService>("ItemFilterService");
   const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
   const configServer = container.resolve<ConfigServer>("ConfigServer");
 
@@ -63,6 +61,21 @@ export default function ProgressionChanges(
 
   const usecInventory = tables.bots.types.usec.inventory;
   const bearInventory = tables.bots.types.bear.inventory;
+  const prices = tables.templates.prices;
+  const handbook = tables.templates.handbook;
+
+  let loot: Record<string, number> = {};
+
+  if (config.enableLootChanges && !config.forceCached) {
+    loot = buildLootChanges(
+      items,
+      handbook,
+      prices,
+      pmcConfig,
+      botConfig,
+      tables.bots.types
+    );
+  }
 
   if (botConfig.secureContainerAmmoStackCount < 80)
     botConfig.secureContainerAmmoStackCount = 80;
@@ -71,8 +84,7 @@ export default function ProgressionChanges(
 
   const usecAppearance = tables.bots.types.usec.appearance;
   const bearAppearance = tables.bots.types.bear.appearance;
-
-  pmcConfig.looseWeaponInBackpackChancePercent = 1;
+  pmcConfig.looseWeaponInBackpackChancePercent = 2;
   pmcConfig.looseWeaponInBackpackLootMinMax = { min: 0, max: 1 };
 
   if (config?.forceCached !== true) {
@@ -90,6 +102,7 @@ export default function ProgressionChanges(
       "Unknown",
       "caretaker",
       "Fence",
+      "БТР",
       ...config.customTradersToExclude,
     ];
 
@@ -181,22 +194,6 @@ export default function ProgressionChanges(
           const equipmentType = getEquipmentType(parent, items);
 
           switch (true) {
-            // case checkParentRecursive(parent, items, [
-            //   barterParent,
-            //   keyMechanical,
-            //   medsParent,
-            //   moneyParent,
-            // ]):
-            //   usecInventory.items.Pockets[_tpl] = 1;
-            //   bearInventory.items.Pockets[_tpl] = 1;
-
-            //   usecInventory.items.TacticalVest[_tpl] = 1;
-            //   bearInventory.items.TacticalVest[_tpl] = 1;
-
-            //   usecInventory.items.Backpack[_tpl] = 1;
-            //   bearInventory.items.Backpack[_tpl] = 1;
-            //   break;
-
             //Add Ammo
             case checkParentRecursive(parent, items, [AmmoParent]):
               const calibre = item._props.Caliber || item._props.ammoCaliber;
@@ -209,15 +206,6 @@ export default function ProgressionChanges(
                   ...(bearInventory.Ammo[calibre] || {}),
                   [_tpl]: 1,
                 };
-
-                // usecInventory.items.Pockets.push(_tpl)
-                // bearInventory.items.Pockets.push(_tpl)
-
-                // usecInventory.items.Backpack.push(_tpl)
-                // bearInventory.items.Backpack.push(_tpl)
-
-                // usecInventory.items.TacticalVest.push(_tpl)
-                // bearInventory.items.TacticalVest.push(_tpl)
 
                 usecInventory.items.SecuredContainer[_tpl] = 1;
                 bearInventory.items.SecuredContainer[_tpl] = 1;
@@ -384,6 +372,7 @@ export default function ProgressionChanges(
       ...combinedNumList,
       ...tradersMasterList[5],
     ]);
+
     buildWeaponSightWhitelist(items, botConfig, tradersMasterList);
     buildOutModsObject(combinedNumWith5List, items, usecInventory, botConfig);
     bearInventory.mods = cloneDeep(usecInventory.mods);
@@ -392,9 +381,6 @@ export default function ProgressionChanges(
 
     // lets disable this for now
     // addKeysToPockets(combinedNumList, items, tables.bots.types.assault.inventory);
-
-    usecInventory.items.SecuredContainer["5e99711486f7744bfc4af328"] = 1;
-    bearInventory.items.SecuredContainer["5e99711486f7744bfc4af328"] = 1;
 
     //Make everything level 1 in equipment
     reduceEquipmentChancesTo1(usecInventory);
@@ -441,16 +427,52 @@ export default function ProgressionChanges(
 
     setWhitelists(items, botConfig, tradersMasterList, mods);
     setWeightingAdjustments(items, botConfig, tradersMasterList, mods);
-    buildInitialRandomization(items, botConfig, tradersMasterList);
+
+    let lootingBotsDetected = false;
+    if (
+      tables?.bots?.types?.bear?.generation?.items?.backpackLoot?.weights &&
+      new Set(
+        Object.values(
+          tables.bots.types.bear.generation.items.backpackLoot.weights
+        )
+      ).size === 1
+    ) {
+      console.log("[AlgorithmicLevelProgression] Looting bots detected");
+      lootingBotsDetected = true;
+    }
+
+    buildInitialRandomization(
+      items,
+      botConfig,
+      tradersMasterList,
+      lootingBotsDetected
+    );
 
     deleteBlacklistedItemsFromInventory(usecInventory);
     deleteBlacklistedItemsFromInventory(bearInventory);
 
-    ensureAllAmmoInSecureContainer(usecInventory);
-    ensureAllAmmoInSecureContainer(bearInventory);
+    // add ai2 and surv to bot containerq
 
-    addBossSecureContainer(usecInventory);
-    addBossSecureContainer(bearInventory);
+    // cms
+    usecInventory.items.SecuredContainer["5d02778e86f774203e7dedbe"] = 1;
+    bearInventory.items.SecuredContainer["5d02778e86f774203e7dedbe"] = 1;
+    // ai2
+    usecInventory.items.SecuredContainer["5755356824597772cb798962"] = 1;
+    bearInventory.items.SecuredContainer["5755356824597772cb798962"] = 1;
+    // Splint
+    usecInventory.items.SecuredContainer["5af0454c86f7746bf20992e8"] = 1;
+    bearInventory.items.SecuredContainer["5af0454c86f7746bf20992e8"] = 1;
+    // Esmarch5e831507ea0a7c419c2f9bd9
+    usecInventory.items.SecuredContainer["5e831507ea0a7c419c2f9bd9"] = 1;
+    bearInventory.items.SecuredContainer["5e831507ea0a7c419c2f9bd9"] = 1;
+
+    ensureAllAmmoInSecuredContainer(usecInventory);
+    ensureAllAmmoInSecuredContainer(bearInventory);
+
+    addBossSecuredContainer(usecInventory);
+    addBossSecuredContainer(bearInventory);
+
+    // addAllMedsToInventory(combinedNumWith5List, usecInventory, items);
 
     fixEmptyChancePlates(botConfig);
   } else {
@@ -464,14 +486,19 @@ export default function ProgressionChanges(
   }
 
   Object.keys(advancedConfig.otherBotTypes).forEach((botType) => {
-    mergeDeep(
-      botConfig.equipment[botType],
-      advancedConfig.otherBotTypes[botType]
-    );
+    botConfig.equipment[botType] = {
+      ...botConfig.equipment[botType],
+      ...advancedConfig.otherBotTypes[botType],
+    };
   });
+
   if (
-    config.removeScavLootForLootingBots &&
-    (botConfig?.equipment?.assault?.randomisation?.[0] as any)?.generation
+    tables?.bots?.types?.assault?.generation?.items?.backpackLoot?.weights &&
+    new Set(
+      Object.values(
+        tables.bots.types.assault.generation.items.backpackLoot.weights
+      )
+    ).size === 1
   ) {
     const generation = (botConfig.equipment.assault.randomisation[0] as any)
       .generation;
@@ -492,6 +519,11 @@ export default function ProgressionChanges(
     };
   }
 
+  // saveToFile(botConfig, "botConfig1.json");
+  // saveToFile(pmcConfig, "pmcConfig1.json");
+
+  globalValues.originalBotTypes = cloneDeep(tables.bots.types);
+  globalValues.originalWeighting = cloneDeep(botConfig.equipment.pmc);
   // tables.bots.types.usec
   // botConfig.equipment.pmc
   // saveToFile(tables.bots.types.usec, `Cache/tablesbotstypesusec.json`);
